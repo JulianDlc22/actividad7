@@ -13,6 +13,7 @@ def CalcularPromedio(nota1,nota2,nota3):
 estudiantes= {}
 
 
+
 op = 0
 
 while op != 4:
@@ -32,6 +33,7 @@ while op != 4:
 
                 noCursos = int(input("\nCuantos Cursos desea Ingresar?(Maximo 5 cursos): "))
                 if noCursos <= 5:
+                    cursos_estudiante = {}
 
                     for i in range(noCursos):
 
@@ -48,24 +50,25 @@ while op != 4:
                                 if 0 < notaProyecto <= 100:
 
                                     promedio = CalcularPromedio(notaTarea,notaParcial,notaProyecto)
+                                    codigoCurso = i+1
 
                                     estudiantes[carnet] = {
-                                        "nombre" : nombre,
-                                        "edad" : edad,
-                                        "carrera" : carrera,
-                                        "nombreCurso" : nombreCurso,
-
-                                        "codigoCurso" : {
-
-                                            "notaTarea" : notaTarea,
-                                            "notaParcial" : notaParcial,
-                                            "notaProyecto": notaProyecto,
-                                            "Promedio" : promedio
-
-                                        }
+                                        "nombre": nombre,
+                                        "edad": edad,
+                                        "carrera": carrera,
+                                        "cursos_estudiante": cursos_estudiante
 
                                     }
 
+                                    cursos_estudiante[codigoCurso] = {
+
+                                        "nombreCurso": nombreCurso,
+                                        "notaTarea": notaTarea,
+                                        "notaParcial": notaParcial,
+                                        "notaProyecto": notaProyecto,
+                                        "promedio": promedio
+
+                                    }
 
 
 
@@ -92,14 +95,17 @@ while op != 4:
                     print(f"Nombre: {datos['nombre']}")
                     print(f"Edad: {datos['edad']}")
                     print(f"Carrera: {datos['carrera']}")
-                    print(f"Nombre Curso: {nombreCurso}")
 
-                    for codigoCurso,datosCurso in estudiantes.items():
 
+                    for codigoCurso,datosCurso in datos['cursos_estudiante'].items():
+
+                        print(f"Nombre Curso: {datosCurso['nombreCurso']}")
                         print(f"Nota Tarea : {datosCurso['notaParcial']}")
                         print(f"Nota Parcial : {datosCurso['notaParcial']}")
                         print(f"Nota Proyecto : {datosCurso['notaProyecto']}")
                         print(f"Promedio: {datosCurso['promedio']}")
+
+
 
 
 
