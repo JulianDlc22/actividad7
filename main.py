@@ -5,6 +5,11 @@ def Menu():
     print("3. Buscar estudiante por carnet")
     print("4. Salir")
 
+def CalcularPromedio(nota1,nota2,nota3):
+
+    promedio = (nota1 + nota2 + nota3)/3
+    return promedio
+
 estudiantes= {}
 
 op = 0
@@ -31,15 +36,17 @@ while op != 4:
 
                         print(f"Curso {i+1} " )
                         nombreCurso = input("Ingrese nombre Curso: ")
-                        notaCurso = int(input("Ingrese la nota Curso: "))
+                        notaCurso = int(input("Ingrese la nota de la  Tarea: "))
 
-                        if notaCurso > 0 and notaCurso <= 100:
-                            notaParcial = int(input("Ingrese la nota Parcial: "))
+                        if  0 < notaCurso <= 100:
+                            notaParcial = int(input("Ingrese la nota del Parcial: "))
 
-                            if notaParcial > 0 and notaParcial <= 100:
-                                notaProyecto = int(input("Ingrese la nota Proyecto: "))
+                            if 0 < notaParcial <= 100:
+                                notaProyecto = int(input("Ingrese la nota del Proyecto: "))
 
-                                if notaProyecto > 0 and notaProyecto <= 100:
+                                if 0 < notaProyecto <= 100:
+
+                                    promedio = calcularPromedio(notaTarea,notaParcial,notaProyecto)
 
                                     estudiantes[carnet] = {
                                         "nombre" : nombre,
@@ -47,9 +54,10 @@ while op != 4:
                                         "carrera" : carrera,
                                         "nombreCurso" : {
 
-                                            "notaCurso" : notaCurso,
+                                            "notaTarea" : notaTarea,
                                             "notaParcial" : notaParcial,
-                                            "notaProyecto": notaProyecto
+                                            "notaProyecto": notaProyecto,
+                                            "Promedio" : promedio
 
                                         }
 
@@ -65,7 +73,7 @@ while op != 4:
 
                         else:
                             print("Error_Ingreso una nota invalida")
-                            i-=1
+                            break
 
                 else:
                     print ("Maximo 5 cursos")
@@ -81,7 +89,7 @@ while op != 4:
 
                     for nombreCurso,datosCurso in datos.items():
                         print(f"Nombre Curso: {nombreCurso}")
-                        print(f"Nota Curso : {datosCurso['notaParcial']}")
+                        print(f"Nota Tarea : {datosCurso['notaParcial']}")
                         print(f"Nota Parcial : {datosCurso['notaParcial']}")
                         print(f"Nota Proyecto : {datosCurso['notaProyecto']}")
 
