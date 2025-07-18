@@ -5,14 +5,14 @@ def Menu():
     print("3. Buscar estudiante por carnet")
     print("4. Salir")
 
-def CalcularPromedio(nota1,nota2,nota3):
 
-    promedio = (nota1 + nota2 + nota3)/3
+def CalcularPromedio(nota1, nota2, nota3):
+    promedio = (nota1 + nota2 + nota3) / 3
+    promedio = round(promedio, 2)
     return promedio
 
-estudiantes= {}
 
-
+estudiantes = {}
 
 op = 0
 
@@ -27,9 +27,9 @@ while op != 4:
         match op:
             case 1:
                 carnet = int(input("Ingrese el Carnet: "))
-                nombre = input("Ingrese nombre completo: ")
+                nombre = input("Ingrese nombre completo: ").upper()
                 edad = int(input("Ingrese la edad: "))
-                carrera = input("Ingrese la carrera: ")
+                carrera = input("Ingrese la carrera: ").upper()
 
                 noCursos = int(input("\nCuantos Cursos desea Ingresar?(Maximo 5 cursos): "))
                 if noCursos <= 5:
@@ -37,11 +37,11 @@ while op != 4:
 
                     for i in range(noCursos):
 
-                        print(f"Curso {i+1} " )
-                        nombreCurso = input("Ingrese nombre Curso: ")
+                        print(f"Curso {i + 1} ")
+                        nombreCurso = input("Ingrese nombre Curso: ").upper()
                         notaTarea = int(input("Ingrese la nota de la Tarea: "))
 
-                        if  0 < notaTarea <= 100:
+                        if 0 < notaTarea <= 100:
                             notaParcial = int(input("Ingrese la nota del Parcial: "))
 
                             if 0 < notaParcial <= 100:
@@ -49,8 +49,8 @@ while op != 4:
 
                                 if 0 < notaProyecto <= 100:
 
-                                    promedio = CalcularPromedio(notaTarea,notaParcial,notaProyecto)
-                                    codigoCurso = i+1
+                                    promedio = CalcularPromedio(notaTarea, notaParcial, notaProyecto)
+                                    codigoCurso = i + 1
 
                                     estudiantes[carnet] = {
                                         "nombre": nombre,
@@ -78,35 +78,45 @@ while op != 4:
 
                             else:
                                 print("Error_Ingreso una nota invalida")
-                                i-=1
+                                i -= 1
 
                         else:
                             print("Error_Ingreso una nota invalida")
                             break
 
                 else:
-                    print ("Maximo 5 cursos")
+                    print("Maximo 5 cursos")
 
             case 2:
                 print("\n--Estudiantes Registrados--")
                 print("\n")
-                for carnet,datos in estudiantes.items():
+                for carnet, datos in estudiantes.items():
                     print(f"Carnet: {carnet}")
                     print(f"Nombre: {datos['nombre']}")
                     print(f"Edad: {datos['edad']}")
                     print(f"Carrera: {datos['carrera']}")
 
-
-                    for codigoCurso,datosCurso in datos['cursos_estudiante'].items():
-
+                    for codigoCurso, datosCurso in datos['cursos_estudiante'].items():
                         print(f"Nombre Curso: {datosCurso['nombreCurso']}")
                         print(f"Nota Tarea : {datosCurso['notaParcial']}")
                         print(f"Nota Parcial : {datosCurso['notaParcial']}")
                         print(f"Nota Proyecto : {datosCurso['notaProyecto']}")
                         print(f"Promedio: {datosCurso['promedio']}")
 
+            case 3:
+                print("\n--Buscar Estudiantes--")
+                buscarEstudiante = int(input("Ingrese el carnet del estudiante: "))
 
+                if  buscarEstudiante in estudiantes:
+                    estudiantes = estudiantes[buscarEstudiante]
+                    print(f"Nombre: {estudiantes['nombre']}")
+                    print(f"Carrera: {estudiantes['carrera']}")
 
+                    for codigoCurso,datosCurso in estudiantes[cursos_estudiante].items():
+                        print(f"Nombre Curso: {datosCurso['nombreCurso']}")
+                        print(f"Promedio: {datosCurso['promedio']}")
+                else:
+                    print("Estudiante no encontrado")
 
 
     except:
